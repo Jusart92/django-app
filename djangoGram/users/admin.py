@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 # Models
 from users.models import Profile
 
+
 @admin.register(Profile)
 class ProfileAdmin(admin.ModelAdmin):
     """Profile admind"""
@@ -22,7 +23,7 @@ class ProfileAdmin(admin.ModelAdmin):
         'user__last_name',
         'phone_number'
         )
-    
+
     list_filter = (
         'user__is_active',
         'user__is_staff',
@@ -31,16 +32,16 @@ class ProfileAdmin(admin.ModelAdmin):
         )
 
     fieldsets = (
-        ('Profile',{
-            'fields':(('user', 'picture'),),
+        ('Profile', {
+            'fields': (('user', 'picture'),),
         }),
-        ('Exrta info',{
-            'fields':(
-                ('website','phone_number'),
+        ('Exrta info', {
+            'fields': (
+                ('website', 'phone_number'),
                 ('biography')
             )
         }),
-        ('Metadata',{
+        ('Metadata', {
             'fields': (('created', 'modified'),),
         }),
     )

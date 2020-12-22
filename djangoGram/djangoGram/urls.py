@@ -7,7 +7,6 @@ from django.urls import path
 from djangoGram import views as local_views
 from django.conf.urls.static import static
 
-from djangoGram import views as local_views
 from posts import views as posts_views
 
 urlpatterns = [
