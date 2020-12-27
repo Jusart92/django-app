@@ -16,6 +16,7 @@ from users.models import Profile
 from users.forms import ProfileForm
 
 
+@login_required
 def update_profile(request):
     """Update a user's profile view."""
     profile = request.user.profile
@@ -29,6 +30,8 @@ def update_profile(request):
             profile.phone_number = data['phone_number']
             profile.biography = data['biography']
             profile.picture = data['picture']
+            if data['picture']:
+                profile.picture = data['picture']
             profile.save()
 
             return redirect('update_profile')
