@@ -1,10 +1,9 @@
 """Posts Views"""
 
 # Django
-from django.shortcuts import render, redirect
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
+from django.urls import reverse_lazy
 
 # Forms
 from posts.forms import PostForm
@@ -29,23 +28,37 @@ class PostDetailView(LoginRequiredMixin, DetailView):
     context_object_name = 'posts'
 
 
-@login_required
-def create_post(request):
-    """Create new posts vieew"""
-    if request.method == 'POST':
-        form = PostForm(request.POST, request.FILES)
-        if form.is_valid():
-            form.save()
-            return redirect('posts:feed')
-    else:
-        form = PostForm()
+class CreatePostView(LoginRequiredMixin, CreateView):
+    """Create a new posts"""
+    template_name = 'posts/new.html'
+    form_class = PostForm
+    success_url = reverse_lazy('posts:feed')
 
-    return render(
-        request=request,
-        template_name='posts/new.html',
-        context={
-            'form': form,
-            'user': request.user,
-            'profile': request.user.profile
-        }
-        )
+    def get_context_data(self, **kwargs):
+        """Add user and profile to context."""
+        context = super().get_context_data(**kwargs)
+        context['user'] = self.request.user
+        context['profile'] = self.request.user.profile
+        return context
+
+
+# @login_required
+# def create_post(request):
+#     """Create new posts vieew"""
+#     if request.method == 'POST':
+#         form = PostForm(request.POST, request.FILES)
+#         if form.is_valid():
+#             form.save()
+#             return redirect('posts:feed')
+#     else:
+#         form = PostForm()
+
+#     return render(
+#         request=request,
+#         template_name='posts/new.html',
+#         context={
+#             'form': form,
+#             'user': request.user,
+#             'profile': request.user.profile
+#         }
+#         )
