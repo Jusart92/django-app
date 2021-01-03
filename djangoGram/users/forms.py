@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from users.models import Profile
 
 
-class SingupForm(forms.Form):
+class SignupForm(forms.Form):
     """Signup form."""
     username = forms.CharField(
         min_length=4,
@@ -107,12 +107,3 @@ class SingupForm(forms.Form):
 
         profile = Profile(user=user)
         profile.save()
-
-
-class ProfileForm(forms.Form):
-    """Profile form."""
-
-    website = forms.URLField(max_length=200, required=True)
-    biography = forms.CharField(max_length=500, required=False)
-    phone_number = forms.CharField(max_length=20, required=False)
-    picture = forms.ImageField(required=False)
