@@ -70,6 +70,8 @@ def update_profile(request):
 
 def login_view(request):
     """Login view."""
+    return render(request, 'users/login.html')
+    quit()
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
