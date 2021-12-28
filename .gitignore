@@ -130,3 +130,8 @@ dmypy.json
 
 # Media
 *.JPG
+*.jpeg
+*.JPEG
+*.jpg
+*.PNG
+*.gif

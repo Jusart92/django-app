@@ -51,7 +51,7 @@ def update_profile(request):
             url = reverse(
                 'users:detail',
                 kwargs={'username': request.user.username}
-                )
+            )
             return redirect(url)
 
     else:
@@ -83,7 +83,7 @@ def login_view(request):
             return render(
                 request, 'users/login.html',
                 {'error': 'Invalid username and password'}
-                )
+            )
 
     return render(request, 'users/login.html')
 
