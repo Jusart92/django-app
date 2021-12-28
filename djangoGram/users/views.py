@@ -63,7 +63,7 @@ def login_view(request):
             return render(
                 request, 'users/login.html',
                 {'error': 'Invalid username and password'}
-                )
+            )
 
     return render(request, 'users/login.html')
 
@@ -74,19 +74,24 @@ def signup(request):
         username = request.POST['username']
         passwd = request.POST['passwd']
         passwd_confirmation = request.POST['passwd_confirmation']
+        # email = request.POST['email']
 
         if passwd != passwd_confirmation:
             return render(
                 request, 'users/signup.html',
                 {'error': 'Password confirmation does not match'}
-                )
-
+            )
         try:
-            user = User.objects.create_user(username=username, password=passwd)
-        except IntegrityError:
-            return render(
-                request, 'users/signup.html',
-                {'error': 'Username is already in user'}
+            if User.objects.get(email=request.POST['email']):
+                return render(request, 'users/signup.html', {'error': 'Email is already in used!'})
+        except User.DoesNotExist:
+            try:
+                user = User.objects.create_user(
+                    username=username, password=passwd)
+            except IntegrityError:
+                return render(
+                    request, 'users/signup.html',
+                    {'error': 'Username is already in user'}
                 )
 
         user.first_name = request.POST['first_name']
