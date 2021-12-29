@@ -18,7 +18,7 @@ class SignupForm(forms.Form):
                 'placeholder': 'Username',
                 'class': 'form-control',
                 'required': True
-                }
+            }
         )
     )
     password = forms.CharField(
@@ -52,9 +52,9 @@ class SignupForm(forms.Form):
                 'placeholder': 'First name',
                 'class': 'form-control',
                 'required': True
-                }
-            )
+            }
         )
+    )
     last_name = forms.CharField(
         min_length=3,
         max_length=50,
@@ -63,7 +63,7 @@ class SignupForm(forms.Form):
                 'placeholder': 'Last name',
                 'class': 'form-control',
                 'required': True
-                }
+            }
         )
     )
 
@@ -107,3 +107,12 @@ class SignupForm(forms.Form):
 
         profile = Profile(user=user)
         profile.save()
+
+
+class ProfileForm(forms.Form):
+    """Profile form."""
+
+    website = forms.URLField(max_length=200, required=False)
+    biography = forms.CharField(max_length=500, required=True)
+    phone_number = forms.CharField(max_length=20, required=False)
+    picture = forms.ImageField(required=True)

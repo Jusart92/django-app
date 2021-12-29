@@ -42,7 +42,6 @@ class CreatePostView(LoginRequiredMixin, CreateView):
         return context
 
 
-# @login_required
 # def create_post(request):
 #     """Create new posts vieew"""
 #     if request.method == 'POST':
@@ -61,4 +60,4 @@ class CreatePostView(LoginRequiredMixin, CreateView):
 #             'user': request.user,
 #             'profile': request.user.profile
 #         }
-#         )
+#     )
