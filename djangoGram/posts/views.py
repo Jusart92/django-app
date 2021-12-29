@@ -23,9 +23,9 @@ class PostFeedView(LoginRequiredMixin, ListView):
 
 class PostDetailView(LoginRequiredMixin, DetailView):
     """Return post detail."""
-    template_name = 'posts/deail.html'
+    template_name = 'posts/detail.html'
     queryset = Post.objects.all()
-    context_object_name = 'posts'
+    context_object_name = 'post'
 
 
 class CreatePostView(LoginRequiredMixin, CreateView):
@@ -40,24 +40,3 @@ class CreatePostView(LoginRequiredMixin, CreateView):
         context['user'] = self.request.user
         context['profile'] = self.request.user.profile
         return context
-
-
-# def create_post(request):
-#     """Create new posts vieew"""
-#     if request.method == 'POST':
-#         form = PostForm(request.POST, request.FILES)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('posts:feed')
-#     else:
-#         form = PostForm()
-
-#     return render(
-#         request=request,
-#         template_name='posts/new.html',
-#         context={
-#             'form': form,
-#             'user': request.user,
-#             'profile': request.user.profile
-#         }
-#     )

@@ -66,4 +66,4 @@ class LoginView(auth_views.LoginView):
 
 class LogoutView(LoginRequiredMixin, auth_views.LogoutView):
     """Logout view."""
-    template_name = 'users/logout.html'
+    # template_name = 'users/logout.html'
